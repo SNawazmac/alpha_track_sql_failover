@@ -1,0 +1,21 @@
+on: workflow_dispatch
+jobs:  
+  job1:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest       
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2 
+    - name: Login via Az module
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_Deloitte}}
+        enable-AzPSSession: true   
+    - name: Invoke sql failover
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          ./Invoke_SQL_Failover_Multi_param.ps1 -resource_group_name "${{vars.SECONDARY_SERVER_RESOURCE_GROUP_NAME}}" -secondary_server_name "${{vars.SECONDARY_SERVER_NAMES}}" -failover_group_name "${{vars.FAILOVER_GROUP_NAMES}}" -secondary_subscription_Id "${{vars.SECONDARY_SUBSCRIPTION_ID_SQL}}"
+          ./Invoke_SQL_Failover_Multi_param.ps1 -resource_group_name "${{vars.SECONDARY_SERVER_RESOURCE_GROUP_NAME}}" -secondary_server_name "${{vars.SECONDARY_SERVER_NAMES2}}" -failover_group_name "${{vars.FAILOVER_GROUP_NAMES2}}" -secondary_subscription_Id "${{vars.SECONDARY_SUBSCRIPTION_ID_SQL}}"
+        azPSVersion: "latest"
