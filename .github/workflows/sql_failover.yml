@@ -36,6 +36,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          ./Invoke_SQL_Failover_Multi_param.ps1 -secondary_mssql_server_resource_group_name "${{inputs.secondary_mssql_server_resource_group_name}}" -secondary_mssql_server_name "${{inputs.secondary_mssql_server_name}}" -failover_group_name "${{inputs.failover_group_name}}" -secondary_mssql_server_subscription_Id "${{inputs.secondary_mssql_server_subscription_ID}}"
-        #./Invoke_SQL_Failover_Multi_param.ps1 -resource_group_name "${{vars.SECONDARY_MSSQL_SERVER_RESOURCE_GROUP_NAME}}" -secondary_server_name "${{vars.SECONDARY_MSSQL_SERVER_NAME_2}}" -failover_group_name "${{vars.FAILOVER_GROUP_NAME_2}}" -secondary_subscription_Id "${{vars.SECONDARY_MSSQL_SERVER_SUBSCRIPTION_ID}}"
+          ./Invoke_SQL_Failover.ps1 -secondary_mssql_server_resource_group_name "${{inputs.secondary_mssql_server_resource_group_name}}" -secondary_mssql_server_name "${{inputs.secondary_mssql_server_name}}" -failover_group_name "${{inputs.failover_group_name}}" -secondary_mssql_server_subscription_Id "${{inputs.secondary_mssql_server_subscription_ID}}"
         azPSVersion: "latest"
